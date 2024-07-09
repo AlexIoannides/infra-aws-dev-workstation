@@ -1,2 +1,3 @@
-# terraform-playpen
-Experiments with Terraform
+# Terraform
+
+Useful infrastructure definitions (as code) using Terraform.
