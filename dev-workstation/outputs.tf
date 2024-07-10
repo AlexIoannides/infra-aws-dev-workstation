@@ -1,3 +1,3 @@
 output "workstation_url" {
-  value = "TODO"
+  value = module.compute.workstation_url
 }
