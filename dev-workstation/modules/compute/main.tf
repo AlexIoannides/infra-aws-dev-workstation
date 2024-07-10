@@ -33,7 +33,7 @@ resource "aws_security_group" "allow_all_outboud" {
 resource "aws_instance" "workstation" {
   ami = var.ami
   associate_public_ip_address = true
-  # iam_instance_profile = TODO
+  iam_instance_profile = var.s3_bucket_iam_role.name
   instance_type = var.instance_type
   # key_name = TODO
   security_groups = [
