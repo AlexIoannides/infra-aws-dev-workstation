@@ -30,3 +30,15 @@ variable "bucket_name" {
   type        = string
   default     = null
 }
+
+variable "path_to_ssh_public_key" {
+  description = "Path to a local public key to use for SSH access"
+  type        = string
+  sensitive   = true
+}
+
+variable "path_to_ssh_private_key" {
+  description = "Path to a local public key to use for SSH access"
+  type        = string
+  sensitive   = true
+}

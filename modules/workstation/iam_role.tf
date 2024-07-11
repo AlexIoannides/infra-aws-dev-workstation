@@ -1,5 +1,13 @@
-resource "aws_iam_role" "bucket_access_role" {
-  name = "${var.namespace}-s3-access-role"
+resource "aws_iam_instance_profile" "bucket_access" {
+  name = "${var.namespace}-s3-access"
+  role = aws_iam_role.bucket_access.name
+  tags = {
+    Name : var.namespace
+  }
+}
+
+resource "aws_iam_role" "bucket_access" {
+  name = "${var.namespace}-s3-access"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -7,9 +15,13 @@ resource "aws_iam_role" "bucket_access_role" {
       {
         Effect = "Allow",
         Principal = {
-          Service = "ec2.amazonaws.com"
+          Service = [
+            "ec2.amazonaws.com"
+          ]
         },
-        Action = "sts:AssumeRole"
+        Action = [
+          "sts:AssumeRole"
+        ]
       }
     ]
   })
@@ -34,5 +46,9 @@ resource "aws_iam_role" "bucket_access_role" {
         }
       ]
     })
+  }
+
+  tags = {
+    Name : var.namespace
   }
 }

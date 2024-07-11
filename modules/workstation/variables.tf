@@ -11,6 +11,15 @@ variable "instance_type" {
 }
 
 variable "bucket_name" {
-  type    = string
-  default = null
+  type = string
+}
+
+variable "path_to_ssh_public_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "path_to_ssh_private_key" {
+  type      = string
+  sensitive = true
 }

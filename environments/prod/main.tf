@@ -23,9 +23,11 @@ provider "aws" {
 }
 
 module "workstation" {
-  source        = "../../modules/workstation"
-  namespace     = var.namespace
-  instance_type = var.instance_type
-  ami           = var.ami
-  bucket_name   = var.bucket_name
+  source                  = "../../modules/workstation"
+  namespace               = var.namespace
+  instance_type           = var.instance_type
+  ami                     = var.ami
+  path_to_ssh_public_key  = var.path_to_ssh_public_key
+  path_to_ssh_private_key = var.path_to_ssh_private_key
+  bucket_name             = var.bucket_name
 }
