@@ -10,12 +10,12 @@ variable "namespace" {
 }
 
 variable "ami" {
-  description = "AMI to use for instance - must be compatible with instance"
+  description = "AMI to use for instance (must be compatible with instance)"
   type        = string
 }
 
 variable "instance_type" {
-  description = "EC2 instance type to create"
+  description = "EC2 instance type to use for workstation (must be compatible with AMI)"
   type        = string
 }
 
@@ -26,7 +26,7 @@ variable "ssh_keypair" {
 }
 
 variable "bucket_name" {
-  description = "S3 bucket with read/write access that EC2 instance can use for data I/O"
+  description = "S3 bucket for workstation data I/O"
   type        = string
   default     = null
 }

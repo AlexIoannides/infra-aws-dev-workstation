@@ -1,8 +1,4 @@
-data "aws_s3_bucket" "data_storage" {
-  bucket = var.bucket_name
-}
-
-resource "aws_iam_role" "s3_access_role" {
+resource "aws_iam_role" "bucket_access_role" {
   name = "${var.namespace}-s3-access-role"
 
   assume_role_policy = jsonencode({

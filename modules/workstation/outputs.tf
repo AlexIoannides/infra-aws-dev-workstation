@@ -1,3 +1,3 @@
-output "workstation_url" {
+output "public_ip" {
   value = aws_instance.workstation.public_ip
 }
