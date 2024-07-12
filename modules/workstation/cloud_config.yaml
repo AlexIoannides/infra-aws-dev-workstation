@@ -1,0 +1,24 @@
+#cloud-config
+write_files:
+  - path: ~/.bash_profile
+    content: |
+      if [ -f ~/.bashrc ]; then
+              . ~/.bashrc
+      fi
+
+      alias lsa='ls -la'
+      alias activate='source .venv/bin/activate'
+
+      workspace=$HOME/workspace
+      if [ -d $workspace ]; then
+          cd "$workspace"
+      fi
+    append: true
+package_update: true
+packages:
+  - git
+  - awscli
+runcmd:
+  - mkdir workspace && cd workspace
+  - python -m venv .venv
+  - .venv/bin/python -m pip install -U pip

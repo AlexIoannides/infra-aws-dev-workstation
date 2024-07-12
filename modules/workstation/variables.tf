@@ -15,9 +15,9 @@ variable "bucket_name" {
 }
 
 variable "path_to_ssh_public_key" {
-  type      = string
+  type = string
 }
 
 variable "path_to_ssh_private_key" {
-  type      = string
+  type = string
 }

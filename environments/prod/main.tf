@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.57"
     }
+    cloudinit = {
+      source  = "hashicorp/cloudinit"
+      version = "2.3.4"
+    }
   }
   backend "s3" {
     bucket  = "ioannides-dev-terraform"
@@ -17,6 +21,8 @@ terraform {
 provider "aws" {
   region = var.region
 }
+
+provider "cloudinit" {}
 
 module "workstation" {
   source                  = "../../modules/workstation"

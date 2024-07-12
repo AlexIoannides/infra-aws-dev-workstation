@@ -2,6 +2,15 @@ data "aws_s3_bucket" "data_storage" {
   bucket = var.bucket_name
 }
 
+data "cloudinit_config" "config" {
+  gzip          = true
+  base64_encode = true
+  part {
+    content_type = "text/cloud-config"
+    content      = "${path.module}/cloud_config.yaml"
+  }
+}
+
 resource "aws_instance" "workstation" {
   ami                         = var.ami
   associate_public_ip_address = true
@@ -15,7 +24,7 @@ resource "aws_instance" "workstation" {
   tags = {
     Name : var.namespace
   }
-  # user_data = TODO
+  user_data = data.cloudinit_config.config.rendered
 }
 
 resource "aws_key_pair" "ssh_key" {
