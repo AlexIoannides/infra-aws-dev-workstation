@@ -5,10 +5,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.57"
     }
-    cloudinit = {
-      source  = "hashicorp/cloudinit"
-      version = "~> 2.3"
-    }
   }
   backend "s3" {
     bucket  = "ioannides-dev-terraform"
