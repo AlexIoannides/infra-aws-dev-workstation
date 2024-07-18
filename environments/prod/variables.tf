@@ -19,24 +19,8 @@ variable "instance_type" {
   type        = string
 }
 
-variable "ssh_keypair" {
-  description = "SSH keypair to use for EC2 instance"
-  type        = string
-  default     = null
-}
-
 variable "bucket_name" {
   description = "S3 bucket for workstation data I/O"
   type        = string
   default     = null
-}
-
-variable "path_to_ssh_public_key" {
-  description = "Path to a local public key to use for SSH access"
-  type        = string
-}
-
-variable "path_to_ssh_private_key" {
-  description = "Path to a local public key to use for SSH access"
-  type        = string
 }

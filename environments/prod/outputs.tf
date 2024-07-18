@@ -1,7 +1,9 @@
 output "workstation_public_ip" {
+  description = "IP address to use when conncection to workstation via SSH"
   value = module.workstation.public_ip
 }
 
 output "ssh_cmd" {
-  value = "ssh -i ${var.path_to_ssh_private_key} ec2-user@${module.workstation.public_ip}"
+  description = "SSH command to use for connecting to the workstation"
+  value = "ssh -i ${module.workstation.private_key_path} ec2-user@${module.workstation.public_ip}"
 }
