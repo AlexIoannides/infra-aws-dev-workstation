@@ -47,7 +47,7 @@ resource "aws_iam_role" "bucket_access" {
 }
 
 resource "aws_iam_instance_profile" "bucket_access" {
-  name = "${var.namespace}-$s3-read-write-profile-${random_integer.id.result}"
+  name = "${var.namespace}-s3-read-write-profile-${random_integer.id.result}"
   role = aws_iam_role.bucket_access.name
   tags = {
     Name    = "s3-bucket-access-profile"

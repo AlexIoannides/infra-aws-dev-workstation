@@ -5,7 +5,7 @@ write_files:
       alias lsa='ls -la'
       alias activate='source .venv/bin/activate'
 
-      workspace=$HOME/workspace
+      workspace=/home/ec2-user/workspace
       if [ -d $workspace ]; then
           cd "$workspace"
       fi

@@ -27,7 +27,7 @@ resource "aws_security_group" "allow_all_outboud" {
   }
 
   tags = {
-    Name    = "ssh-egress"
+    Name    = "allow-all-egress"
     Project = var.namespace
   }
 }
