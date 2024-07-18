@@ -1,11 +1,3 @@
-resource "aws_iam_instance_profile" "bucket_access" {
-  name = "${var.namespace}-s3-access"
-  role = aws_iam_role.bucket_access.name
-  tags = {
-    Name : var.namespace
-  }
-}
-
 resource "aws_iam_role" "bucket_access" {
   name = "${var.namespace}-s3-access"
 
@@ -27,7 +19,7 @@ resource "aws_iam_role" "bucket_access" {
   })
 
   inline_policy {
-    name = "s3-read-write-policy"
+    name = "${var.namespace}-s3-read-write-policy-${random_integer.id.result}"
     policy = jsonencode({
       Version = "2012-10-17",
       Statement = [
@@ -49,6 +41,16 @@ resource "aws_iam_role" "bucket_access" {
   }
 
   tags = {
-    Name : var.namespace
+    Name    = "s3-bucket-access-role"
+    Project = var.namespace
+  }
+}
+
+resource "aws_iam_instance_profile" "bucket_access" {
+  name = "${var.namespace}-$s3-read-write-profile-${random_integer.id.result}"
+  role = aws_iam_role.bucket_access.name
+  tags = {
+    Name    = "s3-bucket-access-profile"
+    Project = var.namespace
   }
 }

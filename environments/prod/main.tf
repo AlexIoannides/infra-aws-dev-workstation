@@ -17,6 +17,10 @@ terraform {
       source  = "hashicorp/local"
       version = "2.5.1"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.6.2"
+    }
   }
   backend "s3" {
     bucket  = "ioannides-dev-terraform"
@@ -36,10 +40,12 @@ provider "tls" {}
 
 provider "local" {}
 
+provider "random" {}
+
 module "workstation" {
-  source                  = "../../modules/workstation"
-  namespace               = var.namespace
-  instance_type           = var.instance_type
-  ami                     = var.ami
-  bucket_name             = var.bucket_name
+  source        = "../../modules/workstation"
+  namespace     = var.namespace
+  instance_type = var.instance_type
+  ami           = var.ami
+  bucket_name   = var.bucket_name
 }

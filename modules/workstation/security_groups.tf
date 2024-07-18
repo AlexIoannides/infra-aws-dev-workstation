@@ -1,5 +1,5 @@
 resource "aws_security_group" "allow_ssh" {
-  name        = "${var.namespace}-allow-ssh"
+  name        = "${var.namespace}-allow-ssh-${random_integer.id.result}"
   description = "Allow SSH ingress from anywhere"
 
   ingress {
@@ -10,12 +10,13 @@ resource "aws_security_group" "allow_ssh" {
   }
 
   tags = {
-    Name = var.namespace
+    Name    = "ssh-ingress"
+    Project = var.namespace
   }
 }
 
 resource "aws_security_group" "allow_all_outboud" {
-  name        = "${var.namespace}-allow-all-outboud"
+  name        = "${var.namespace}-allow-all-outboud-${random_integer.id.result}"
   description = "Allow all outbound traffic"
 
   egress {
@@ -26,6 +27,7 @@ resource "aws_security_group" "allow_all_outboud" {
   }
 
   tags = {
-    Name = var.namespace
+    Name    = "ssh-egress"
+    Project = var.namespace
   }
 }

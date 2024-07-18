@@ -1,11 +1,7 @@
 #cloud-config
 write_files:
-  - path: ~/.bash_profile
+  - path: /home/ec2-user/.bash_profile
     content: |
-      if [ -f ~/.bashrc ]; then
-              . ~/.bashrc
-      fi
-
       alias lsa='ls -la'
       alias activate='source .venv/bin/activate'
 
@@ -19,6 +15,5 @@ packages:
   - git
   - awscli
 runcmd:
-  - mkdir workspace && cd workspace
-  - python -m venv .venv
-  - .venv/bin/python -m pip install -U pip
+  - mkdir /home/ec2-user/workspace
+  - chown -R ec2-user /home/ec2-user/workspace

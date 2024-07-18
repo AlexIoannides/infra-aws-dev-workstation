@@ -11,6 +11,11 @@ data "cloudinit_config" "config" {
   }
 }
 
+resource "random_integer" "id" {
+  min = 0
+  max = 100000
+}
+
 resource "aws_instance" "workstation" {
   ami                         = var.ami
   associate_public_ip_address = true
@@ -22,7 +27,8 @@ resource "aws_instance" "workstation" {
     aws_security_group.allow_all_outboud.name
   ]
   tags = {
-    Project : var.namespace
+    Name    = "${var.namespace}-workstation-${random_integer.id.result}"
+    Project = var.namespace
   }
   user_data = data.cloudinit_config.config.rendered
 }
