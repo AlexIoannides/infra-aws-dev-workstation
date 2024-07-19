@@ -1,22 +1,26 @@
-name: Terraform
+name: CI
 
 on:
   pull_request:
     branches: [ "main" ]
 
+  # Allow manual execution from the Actions tab
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: "1.9.1"
-    - name: Check code formatting
-      run: terraform fmt -recursive
-    - name: Validate configuration
-      run: |
-        cd environments/prod
-        terraform validate
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.9.0"
+
+      - name: Check code formatting
+        run: terraform fmt -recursive
+
+      - name: Validate configuration
+        run: |
+          cd environments/prod
+          terraform validate
