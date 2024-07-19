@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+  # Allow manual execution from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: github-actions
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+
+      - name: Configure Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.9.0"
+
+      - name: Initialise Terraform
+        run: (cd environments/prod && terraform init)
+  
+      - name: Check code formatting
+        run: terraform fmt -recursive
+
+      - name: Validate configuration
+        run: (cd environments/prod && terraform validate)
+
+      - name: Verify execution viability
+        run: (cd environments/prod && terraform plan)
