@@ -23,4 +23,9 @@ jobs:
       - name: Validate configuration
         run: |
           cd environments/prod
+          terraform init
           terraform validate
+
+      - name: Verify execution viability
+        run: |
+          terraform plan
