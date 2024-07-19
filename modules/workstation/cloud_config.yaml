@@ -1,0 +1,19 @@
+#cloud-config
+write_files:
+  - path: /home/ec2-user/.bash_profile
+    content: |
+      alias lsa='ls -la'
+      alias activate='source .venv/bin/activate'
+
+      workspace=/home/ec2-user/workspace
+      if [ -d $workspace ]; then
+          cd "$workspace"
+      fi
+    append: true
+package_update: true
+packages:
+  - git
+  - awscli
+runcmd:
+  - mkdir /home/ec2-user/workspace
+  - chown -R ec2-user /home/ec2-user/workspace
