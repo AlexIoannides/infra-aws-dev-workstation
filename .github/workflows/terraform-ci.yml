@@ -20,11 +20,16 @@ jobs:
       - name: Check code formatting
         run: terraform fmt -recursive
 
-      - name: Validate configuration
+      - name: Initialise Terraform
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cd environments/prod
           terraform init
-          terraform validate
+
+      - name: Validate configuration
+        run: terraform validate
 
       - name: Verify execution viability
         run: |
